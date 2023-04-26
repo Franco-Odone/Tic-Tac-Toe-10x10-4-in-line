@@ -1,4 +1,5 @@
-// Se definen tres variables: "boardSize" es el tamaño del tablero, "winningLength" es la longitud requerida para ganar y "winningCombos" es un array vacío que almacenará todas las combinaciones ganadoras.
+// Se definen tres variables: "boardSize" es el tamaño del tablero, "winningLength" es la longitud requerida para ganar
+// y "winningCombos" es un array vacío que almacenará todas las combinaciones ganadoras.
 const boardSize = 10;
 const winningLength = 4;
 const winningCombos = [];
