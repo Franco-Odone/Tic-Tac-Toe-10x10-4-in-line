@@ -1,0 +1,52 @@
+Explicación archivo helpers.js:
+
+Primero, se definen tres variables constantes: `boardSize`, `winningLength` y `winningCombos`. `boardSize` indica el tamaño del tablero, `winningLength` indica la cantidad de fichas que un jugador debe tener en línea para ganar, y `winningCombos` es un array vacío que almacenará todas las posibles combinaciones ganadoras en el tablero.
+
+Luego, el código utiliza cuatro bucles `for` anidados para generar todas las posibles combinaciones ganadoras en el tablero. Cada uno de estos bucles genera una combinación ganadora de una manera diferente:
+
+- El primer bucle genera todas las combinaciones ganadoras en las filas del tablero.
+- El segundo bucle genera todas las combinaciones ganadoras en las columnas del tablero.
+- El tercer bucle genera todas las combinaciones ganadoras en las diagonales descendentes del tablero.
+- El cuarto bucle genera todas las combinaciones ganadoras en las diagonales ascendentes del tablero.
+
+En cada iteración de cada uno de estos bucles, se crea un nuevo array llamado `combo` que contiene el índice de cada casilla en la combinación ganadora. Estos índices se calculan utilizando una fórmula que combina el número de fila y el número de columna de cada casilla.
+
+Una vez que se ha generado cada combinación ganadora, se agrega al array `winningCombos`.
+
+Finalmente, se define una función llamada `calculateWinner` que toma como parámetro un array `board` que representa el estado actual del tablero. La función itera a través de cada una de las combinaciones ganadoras almacenadas en `winningCombos`, y verifica si todas las casillas en esa combinación contienen el mismo valor (ya sea "X" o "O"). Si encuentra una combinación ganadora, devuelve el valor de la ficha que ha ganado. Si no se encuentra ninguna combinación ganadora, la función devuelve `null`.
+
+En resumen, este código genera todas las posibles combinaciones ganadoras en un tablero de tamaño `boardSize` y longitud de línea ganadora `winningLength`, y proporciona una función para verificar si hay un ganador en un tablero dado.
+
+Para la primera fila del tablero, que tiene un índice de `0`, el bucle se ejecutaría de la siguiente manera:
+
+```
+for (let col = 0; col <= boardSize - winningLength; col++) {
+// La resta de boardSize - winningLength se hace para que se produzcan las iteraciones necesarias para que por ejemplo el elemento de la fila 0 columna 9 no tenga índice mayor a 9, por lo tanto las columnas se mantendrán dentro de los límites del tablero.
+  const combo = [];
+  for (let i = 0; i < winningLength; i++) {
+    combo.push(row * boardSize + col + i);
+  }
+  winningCombos.push(combo);
+}
+
+```
+
+- En la primera iteración, `col` sería `0`.
+- Se crea un array vacío llamado `combo`.
+- El segundo bucle for se ejecuta `winningLength` veces (en este caso, 4 veces).
+- En la primera iteración del segundo bucle for, se agrega el índice del elemento en la posición `(0,0)` del tablero (`row * boardSize + col + i` se convierte en `0 * 10 + 0 + 0`, que es `0`).
+- En la segunda iteración del segundo bucle for, se agrega el índice del elemento en la posición `(0,1)` del tablero (`row * boardSize + col + i` se convierte en `0 * 10 + 0 + 1`, que es `1`).
+- En la tercera iteración del segundo bucle for, se agrega el índice del elemento en la posición `(0,2)` del tablero (`row * boardSize + col + i` se convierte en `0 * 10 + 0 + 2`, que es `2`).
+- En la cuarta y última iteración del segundo bucle for, se agrega el índice del elemento en la posición `(0,3)` del tablero (`row * boardSize + col + i` se convierte en `0 * 10 + 0 + 3`, que es `3`).
+- Se agrega el array `combo` recién creado al array `winningCombos`.
+
+Este proceso se repetiría para cada combinación ganadora en la primera fila del tablero, comenzando desde la posición `(0,0)` y moviéndose hacia la derecha en incrementos de uno hasta llegar a la última posible combinación de cuatro elementos en la fila.
+
+Siguiendo el proceso del primer bucle for para la primera fila del tablero, ahora el valor de col sería 1:
+
+- Iteración 2: col = 1. La combinación ganadora sería [1, 2, 3, 4], ya que estos son los índices de los cuadros de la primera fila consecutivos comenzando desde la columna 1.
+- Iteración 3: col = 2. La combinación ganadora sería [2, 3, 4, 5], ya que estos son los índices de los cuadros de la primera fila consecutivos comenzando desde la columna 2.
+- Iteración 4: col = 3. La combinación ganadora sería [3, 4, 5, 6], ya que estos son los índices de los cuadros de la primera fila consecutivos comenzando desde la columna 3.
+- Iteración 5: col = 4. La combinación ganadora sería [4, 5, 6, 7], ya que estos son los índices de los cuadros de la primera fila consecutivos comenzando desde la columna 4.
+- Iteración 6: col = 5. La combinación ganadora sería [5, 6, 7, 8], ya que estos son los índices de los cuadros de la primera fila consecutivos comenzando desde la columna 5.
+- Iteración 7: col = 6. La combinación ganadora sería [6, 7, 8, 9], ya que estos son los índices de los cuadros de la primera fila consecutivos comenzando desde la columna 6.
